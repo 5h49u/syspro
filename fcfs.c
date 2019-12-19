@@ -10,7 +10,7 @@ typedef struct n{
     int accessTime,burstTime,exitTime,startTime,tat,waitTime;
     struct n *next;
 }node;
-
+static int totalwt=0,totaltat=0;
 node *head,*last;
 
 void create(char pname[20][20],int at,int bt) {
@@ -95,6 +95,8 @@ void print() {
     printf("Pname\tArrival\tBurst\tStart\texit\ttat\twait\n");
     for(p=head;p!=NULL;p=p->next) {
         printf("%s\t%d\t%d\t%d\t%d\t%d\t%d\n",p->pname,p->accessTime,p->burstTime,p->startTime,p->exitTime,p->tat,p->waitTime);
+        totaltat+=p->tat;
+        totalwt+=p->waitTime;
     }
 }
 
@@ -116,5 +118,7 @@ int main(void) {
     print();
     calc();
     print();
+    printf("\nAverage Waiting time:%f",(float)totalwt/n);
+    printf("\nAverage Turn Around Time:%f\n",(float)totaltat/n);
 
 }
