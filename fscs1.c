@@ -1,3 +1,8 @@
+//First Come First Serve CPU scheduling algorithm using arrays
+
+
+
+
 #include<stdio.h>
 #include<string.h>
 
