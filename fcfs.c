@@ -100,6 +100,39 @@ void print() {
     }
 }
 
+void printg() {
+
+    node *current,*p=head,*q=head;
+
+    for(current=head;current->next!=NULL;current=current->next) ;
+
+    printf("Exit Times -\t");
+    printf("%d\t\t",p->startTime);
+
+   for(int i=0;i<=current->exitTime;i++) {
+        if(i== p->exitTime) {
+           // printf("%d\t\n",p->exitTime);
+            printf("%d\t\t",p->exitTime);
+            p=p->next;
+            
+        }
+        
+    }
+printf("\n");
+    printf("Pname\t\t");
+    for(int i=0;i<=current->exitTime;i++) {
+        if(i== q->exitTime) {
+           // printf("%d\t\n",p->exitTime);
+            printf("\t%s\t",q->pname);
+            q=q->next;
+            
+        }
+        
+    }
+
+ printf("\n");
+}
+
 int main(void) {
 
 
@@ -120,5 +153,5 @@ int main(void) {
     print();
     printf("\nAverage Waiting time:%f",(float)totalwt/n);
     printf("\nAverage Turn Around Time:%f\n",(float)totaltat/n);
-
+    printg();
 }
