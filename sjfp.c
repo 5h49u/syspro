@@ -33,57 +33,54 @@ last = p;
 void sort() {
     node *p,*q;
     int temp;
+    int exit=0;
     char tem[20];
     for(p=head;p!=NULL;p=p->next) {
-        for(q=p->next;q!=NULL; q=q->next) {
-            if(p->arrivalT > q->arrivalT) {
-                strcpy(tem,p->pname);
-                strcpy(p->pname,q->pname);
-                strcpy(q->pname,tem);
+           for(q=p->next;q!=NULL;q=q->next) {
+               if(p->arrivalT > q->arrivalT) {
+                   strcpy(tem,p->pname);
+                   strcpy(p->pname,q->pname);
+                   strcpy(q->pname,tem);
 
-                temp = p->arrivalT;
-                p->arrivalT=q->arrivalT;
-                q->arrivalT=temp;
+                   temp=p->arrivalT;
+                   p->arrivalT=q->arrivalT;
+                   q->arrivalT=temp;
 
-                temp=p->burstT;
-                p->burstT=q->burstT;
-                q->burstT=temp;
-            }
-        }
-    
-    }
-    printf("\nBefore\n");
-    print();
-    printf("\n");
-    for(p=head;p!=NULL;p=p->next) {
-        for (q=head;q!=NULL;q=q->next) {
-            if(p==head) {
-              
-            }
-            else {
-                
-               // if(p->burstT > q->arrivalT) {
-                    if(p->burstT > q->burstT) {
-                        printf("\nWent here\n");
-                        print();
-                        strcpy(tem,p->pname);
-                        strcpy(p->pname,q->pname);
-                        strcpy(q->pname,tem);
+                   temp=p->burstT;
+                   p->burstT=q->burstT;
+                   q->burstT=temp;
+               }
+           }
+       }
 
-                        temp = p->arrivalT;
-                        p->arrivalT=q->arrivalT;
-                        q->arrivalT=temp;
+       print();
+        for(p=head;p!=NULL;p=p->next) {
+           for(q=p->next;q!=NULL;q=q->next) { 
+               if(p==head) {
+                   exit = p->burstT;
+               }
+               else {
+                   if(q->arrivalT <= exit && p->burstT > q->burstT) {
+                       strcpy(tem,p->pname);
+                      strcpy(p->pname,q->pname);
+                      strcpy(q->pname,tem);
+
+                       temp=p->arrivalT;
+                       p->arrivalT=q->arrivalT;
+                       q->arrivalT=temp;
 
                         temp=p->burstT;
-                        p->burstT=q->burstT;
-                        q->burstT=temp;
-                        printf("\n");
-                        print();
-                    }
-               // }
-            }
+                    p->burstT=q->burstT;
+                         q->burstT=temp;
+                   }
+               }
+         
+         
+           }
+           exit = exit + p->burstT;
         }
-    }
+        printf("\n");
+        print();
 
 }
 
@@ -109,7 +106,7 @@ int main() {
 
     sort();
    // calc();
-   print();
+  // print();
 
 
 
