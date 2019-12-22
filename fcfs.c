@@ -34,14 +34,14 @@ void create(char pname[20], int at, int bt)
     last = p;
 }
 
-void sort()
+void sort() //Sort according to Arrival Time
 {
 
     node *p, *q;
     int t;
     char name[20];
 
-    for (p = head; p != NULL; p = p->next)
+    for (p = head; p != NULL; p = p->next) //Bubble Sort
     {
         for (q = p->next; q != NULL; q = q->next)
         {
@@ -63,17 +63,17 @@ void sort()
     }
 }
 
-void calc()
+void calc()//Calculate Start time ,End Time, Turn around time, Wait time for each process(Common logic for all Scheduling Programs)
 {
     node *p, *q;
     for (p = head; p != NULL; p = p->next)
     {
         if (p == head)
         {
-            p->startTime = p->accessTime;
-            p->exitTime = p->burstTime;
-            p->tat = p->exitTime - p->accessTime;
-            p->waitTime = p->tat - p->burstTime;
+            p->startTime = p->accessTime; //Start time for each process would be its arrival time
+            p->exitTime = p->burstTime;     //End time for first process would be its burst time
+            p->tat = p->exitTime - p->accessTime;//Turn around time = Exit time - arrival time
+            p->waitTime = p->tat - p->burstTime;// Wait time = Turn around time - Burst time of the process
         }
         for (q = p->next; q != NULL; q = q->next)
         {
@@ -83,8 +83,8 @@ void calc()
                 q->startTime = q->accessTime;
             }
             else
-                q->startTime = p->exitTime;
-            q->exitTime = q->startTime + q->burstTime;
+                q->startTime = p->exitTime; //Start time of subsequent process would be the end time of previous process
+            q->exitTime = q->startTime + q->burstTime;//End time would be the Start time + Burst time of the process
             q->tat = q->exitTime - q->accessTime;
             q->waitTime = q->tat - q->burstTime;
 
@@ -93,7 +93,7 @@ void calc()
     }
 }
 
-void print()
+void print() //Printing the data in a tabluar form (Common logic for all scheduling programs)
 {
     node *p;
     printf("Pname\tArrival\tBurst\tStart\texit\ttat\twait\n");
@@ -105,7 +105,7 @@ void print()
     }
 }
 
-void printg()
+void printg() //Printing Gantt Chart(Common logic for all scheduling programs)
 {
 
     node *current, *p = head, *q = head;
