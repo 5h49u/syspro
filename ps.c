@@ -76,9 +76,8 @@ void sort()
           {
                maxAT = p->arrivalT;
           }
-          endT = endT + p->burstT;
+          
      }
-     printf("The max arrival time is %d\n",maxAT);
 
      for(p=head ; p!=NULL;p=p->next) {
           for(q=p->next;q!=NULL;q=q->next) {
