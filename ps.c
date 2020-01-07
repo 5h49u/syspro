@@ -59,7 +59,7 @@ void swap(node *s, node *r)
 
 void sort()
 {
-     int endT=0, maxAT = 0,end=0;
+     int endT = 0, maxAT = 0, end = 0;
      ;
      node *p, *q;
 
@@ -78,35 +78,29 @@ void sort()
           }
           endT = endT + p->burstT;
      }
+     printf("The max arrival time is %d\n",maxAT);
 
-     for (p = head; p != NULL; p = p->next)
-     {
-          if (p == head)
-          {
-               end=p->burstT;
-               continue;
-          }
-          for (q = p->next; q != NULL; q = q->next)
-          {
-               if(end >= maxAT && q->priority > p->priority ) {
+     for(p=head ; p!=NULL;p=p->next) {
+          for(q=p->next;q!=NULL;q=q->next) {
+               if(end >= maxAT && p->priority <q->priority) {
                     swap(p,q);
-                    printf("\nSwapped\n");
                } 
-
                else {
-                    
-                    for(int i = p->arrivalT ; i< p->burstT;i++) {
-                         if(i == q->arrivalT && q->priority > p->priority) {
-                              printf("\nSplitted\n");
-                              endT = endT - ((p->burstT) - i);
-                               create(p->pname, endT, ((p->burstT) - i),p->priority);
-                               p->burstT = i;
-                               swap(p->next,q);
-                         } 
+                    for(int i =p->arrivalT;i<=(p->arrivalT + p->burstT) ; i++) {
+                         if(i - (p->arrivalT + p->burstT) == 0) {
+                              break;
+                         }
+                         else if(i == q->arrivalT && p->priority < q->priority)  {
+                              create(p->pname,0,0,p->priority);
+                              p->burstT=i - p->arrivalT;
+                              swap(p->next,q);
+                              break;
+                         }
                     }
                }
           }
-          end=p->burstT;
+          end = end + p->burstT;
+          
      }
 }
 
