@@ -1,4 +1,4 @@
-//Shortest Job First(Non Preemptive) using Linked Lists
+//Shortest Job First(Non-Preemptive) 
 
 #include <stdio.h>
 #include <string.h>
