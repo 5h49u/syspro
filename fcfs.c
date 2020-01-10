@@ -1,3 +1,5 @@
+//FIRST COME FIRST SORT SCHEDULING ALGORITHM
+
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
@@ -155,7 +157,6 @@ int main(void)
         create(pname, at, bt);
     }
     sort();
-    print();
     calc();
     print();
     printf("\nAverage Waiting time:%f", (float)totalwt / n);
