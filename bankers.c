@@ -137,7 +137,6 @@ int main(){
 	int ret;
 	int allocation[10][10], max[10][10], need[10][10], available[1][10];
 	int pid,ch;
-	printf("\n DEADLOCK AVOIDANCE USING BANKER'S ALGORITHM\n");
 	accept(allocation,need,max,available);
 	ret=banker(allocation,need,available);
 	if(ret !=0 ){
