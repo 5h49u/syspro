@@ -44,9 +44,8 @@ int predict(int reference_length, int references[],int frame_size,int frame[], i
 
 void add_reference(int frame_size,int frame[], int reference, int current_position,int reference_length, int references[])
 {
-	int i;
 	int allocated=1;
-	for(i=0;i<frame_size;i++)
+	for(int i=0;i<frame_size;i++)
 	{
 		
 		if(frame[i]==reference)

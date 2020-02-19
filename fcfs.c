@@ -4,7 +4,7 @@
 #include <string.h>
 #include <malloc.h>
 
-typedef struct n
+typedef struct n   //Struct for each process
 {
 
     char pname[20];
@@ -14,7 +14,7 @@ typedef struct n
 static int totalwt = 0, totaltat = 0;
 node *head, *last;
 
-void create(char pname[20], int at, int bt)
+void create(char pname[20], int at, int bt) //Create a new node for every process and link them in the order of input
 {
 
     node *p;
@@ -26,14 +26,14 @@ void create(char pname[20], int at, int bt)
 
     if (head == NULL)
     {
-        head = p;
+        head = p;                          //If an empty list
     }
     else
     {
-        last->next = p;
+        last->next = p;                     //Keep adding nodes at the last
     }
 
-    last = p;
+    last = p;                               //Move the pointer to the last
 }
 
 void sort() //Sort according to Arrival Time
@@ -47,7 +47,7 @@ void sort() //Sort according to Arrival Time
     {
         for (q = p->next; q != NULL; q = q->next)
         {
-            if (p->accessTime > q->accessTime)
+            if (p->accessTime > q->accessTime)           //If the arrival time is lower then swap
             {
                 strcpy(name, p->pname);
                 strcpy(p->pname, q->pname);
@@ -112,7 +112,7 @@ void printg() //Printing Gantt Chart(Common logic for all scheduling programs)
 
     node *current, *p = head, *q = head;
 
-    for (current = head; current->next != NULL; current = current->next)
+    for (current = head; current->next != NULL; current = current->next)  //Move current to the last node
         ;
 
     printf("Exit Times -\t");
@@ -150,7 +150,7 @@ int main(void)
     printf("How many processes?\n");
     scanf("%d", &n);
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)                     //Accept new processes
     {
         printf("Enter the process name and arrival time and burst time\n");
         scanf("%s%d%d", pname, &at, &bt);
@@ -159,7 +159,7 @@ int main(void)
     sort();
     calc();
     print();
-    printf("\nAverage Waiting time:%f", (float)totalwt / n);
+    printf("\nAverage Waiting time:%f", (float)totalwt / n);   
     printf("\nAverage Turn Around Time:%f\n", (float)totaltat / n);
     printg();
 }
