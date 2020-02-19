@@ -18,14 +18,14 @@ void print(int frame_size,int frame[])
 
 int predict(int reference_length, int references[],int frame_size,int frame[], int start)
 {
-	int pos = -1, farthest = start+1;
+	int pos = -1, farthest = start+1; 		//Assume the base value of farthest to be the one just ahead for now
 	for(int i=0;i<frame_size;i++)
 	{
-		for(int j=start;j>=0;j--)
+		for(int j=start;j>=0;j--)			//Go through the list backwards and see where the last match for the currennt frame was
 		{
 			if(frame[i]==references[j])
 			{
-				if(j<farthest)
+				if(j<farthest)				//If the match index is smaller than the current farthest change it to the new one
 				{
 					farthest=j;
 					pos=i;
@@ -38,11 +38,11 @@ int predict(int reference_length, int references[],int frame_size,int frame[], i
 	if(pos == -1)
 		return 0;
 	else
-		return pos;
+		return pos;		//Return the value of the index of whose the value changes
 }
 
 
-void add_reference(int frame_size,int frame[], int reference, int current_position,int reference_length, int references[])
+void add(int frame_size,int frame[], int reference, int current_position,int reference_length, int references[])
 {
 	int allocated=1;
 	for(int i=0;i<frame_size;i++)
@@ -66,9 +66,9 @@ void add_reference(int frame_size,int frame[], int reference, int current_positi
 	}
 	if(allocated==1)
 	{
-		int j = predict(reference_length,references,frame_size,frame,current_position);
+		int j = predict(reference_length,references,frame_size,frame,current_position);  //Predict which position to insert the value on the basis of Least Recently Used algorithm
 
-		frame[j] = reference;
+		frame[j] = reference; 		//Changes the value of the array depending on the value of j predicted by LRU
 		printf("Fault for %d | ", reference);
 		faults++;	
 	}
@@ -95,7 +95,7 @@ int main()
 	for(i=0;i<number_of_references;i++)
 	{
 		scanf("%d",&reference[i]);
-		add_reference(frame_size,frame,reference[i],i,number_of_references,reference);
+		add(frame_size,frame,reference[i],i,number_of_references,reference);
 	}
 	printf("\nNumber of faults: %d \nNumber of hits: %d\n",faults,hits );
 }
